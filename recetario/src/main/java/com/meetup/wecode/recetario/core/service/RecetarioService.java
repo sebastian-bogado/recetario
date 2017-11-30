@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class RecetarioService {
@@ -14,8 +13,12 @@ public class RecetarioService {
     @Autowired
     private RecetarioDao recetarioDao;
 
-    public Optional<Recetario> findRecetarioById(Long id) {
-        return recetarioDao.findById(id);
+    public List<Recetario> findAllRecetarios() {
+        return recetarioDao.findAll();
+    }
+
+    public Recetario findRecetarioById(Long id) {
+        return recetarioDao.findById(id).get();
     }
 
     public Recetario saveRecetario(Recetario recetario) {
@@ -24,9 +27,5 @@ public class RecetarioService {
 
     public void deleteRecetario(Long id) {
         recetarioDao.delete(id);
-    }
-
-    public List<Recetario> getRecetarios() {
-        return recetarioDao.findAll();
     }
 }
